@@ -7,17 +7,18 @@ const {
   updateGoals,
   getById,
 } = require("../controllers/goalController");
+const { protect } = require("../middleware/authMiddleware");
 
 // we can add functions in the body but its a good practice to add it in a controller
 
-router.get("/", getGoals);
+router.get("/", protect, getGoals);
 
-router.post("/", setGoals);
+router.post("/", protect, setGoals);
 
-router.get("/:id", getById);
+router.get("/:id", protect, getById);
 
-router.put("/:id", updateGoals);
+router.put("/:id", protect, updateGoals);
 
-router.delete("/:id", deleteGoals);
+router.delete("/:id", protect, deleteGoals);
 
 module.exports = router;

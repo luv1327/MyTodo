@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
+const autoIncrement = require("mongoose-auto-increment");
 
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);
+
     console.log(`Mongo DB connected : ${conn.connection.host}`.cyan.underline);
   } catch (err) {
     console.log(err);
@@ -11,3 +13,5 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
+
+autoIncrement.initialize(mongoose.connection);
